@@ -1,0 +1,45 @@
+class Solution {
+public:
+    //虽然AC了但是好不爽，下次重做
+    int end;
+
+    int romanToInt(string s) {
+        // Start typing your C/C++ solution below
+        // DO NOT write int main() function
+        int ans=0;
+        end = s.length()-1;
+        ans += romanToIntSingle(s, 'I', 'V', 'X');
+        ans += romanToIntSingle(s, 'X', 'L', 'C')*10;
+        ans += romanToIntSingle(s, 'C', 'D', 'M')*100;
+        ans += romanToIntSingle(s, 'M', ' ', ' ')*1000;        
+        return ans;
+    }
+    int romanToIntSingle(string &s, char one, char five, char ten){
+        if (end<0)
+            return 0;
+        
+        int ans=0;
+        
+        if (end>0 && s[end]==ten && s[end-1]==one){
+            ans = 9;
+            end -= 2;
+        }else{
+            for (;end>=0 && s[end]==one;end--){
+                ans++;
+            }
+            
+            if (end<0)
+               return ans;
+            
+            if (s[end]==five){
+                ans += 5;
+                end--;
+                if (end>=0 && s[end]==one){
+                    ans=4;
+                    end--;
+                }
+            }            
+        }
+        return ans;
+    }
+};

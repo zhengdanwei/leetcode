@@ -1,0 +1,46 @@
+class Solution {
+public:
+    string intToRoman(int num) {
+        // Start typing your C/C++ solution below
+        // DO NOT write int main() function    
+        if (num>3999)
+            return "";
+        string ans="";
+        
+        ans += toRomanSingle(num/1000,'M',' ',' ');
+        num = num % 1000;
+        ans += toRomanSingle(num/100,'C','D','M');
+        num = num % 100;
+        ans += toRomanSingle(num/10,'X','L','C');
+        num = num % 10;
+        ans += toRomanSingle(num,'I','V','X');
+        
+        return ans;
+    }
+    
+    string toRomanSingle(int num, char one, char five, char ten){
+        string ans="";
+        switch(num){
+            case 1:
+            case 2:
+            case 3:
+                ans.append(num, one);
+                break;
+            case 4:
+                ans.append(1, one).append(1, five);
+                break;
+            case 5:
+            case 6:
+            case 7:
+            case 8:
+                ans.append(1, five).append(num-5, one);
+                break;
+            case 9:
+                ans.append(1,one).append(1,ten);
+                break;
+            default:
+                break;
+        }
+        return ans;
+    }
+};
