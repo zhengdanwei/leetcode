@@ -1,0 +1,39 @@
+class Solution {
+public:
+    int atoi(const char *str) {
+        // Start typing your C/C++ solution below
+        // DO NOT write int main() function
+        while (*str==' '){
+            str++;
+        }        
+        
+        int sign=1;
+        if (*str=='-'){
+            sign=-1;
+            str++;
+        }else if(*str=='+'){
+            sign=1;
+            str++;
+        }
+        
+        int ans=0;
+        while (*str!='\0'){
+            if (*str<'0' || *str>'9')
+                return ans;
+            
+            if (sign==1){
+                if (ans<=(INT_MAX-*str+'0')/10)
+                    ans=ans*10+*str-'0';
+                else
+                    return INT_MAX;
+            }else{
+                if (ans>=(INT_MIN+*str-'0')/10) 
+                    ans=ans*10 + sign*(*str-'0');         
+                else
+                    return INT_MIN;
+            }
+            str++;
+        }
+        return ans;
+    }
+};
