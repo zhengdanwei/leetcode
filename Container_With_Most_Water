@@ -1,0 +1,21 @@
+class Solution {
+public:
+    int maxArea(vector<int> &height) {
+        // Start typing your C/C++ solution below
+        // DO NOT write int main() function
+        
+        //TODO：当前是简单粗暴的枚举解法，需要优化算法
+        int max=0;
+        int x,y;
+        for (int i=0;i<height.size();i++){
+            for (int j=i+1;j<height.size();j++){
+                x = j-i;
+                y = height[i] < height[j] ? height[i] : height[j];
+                if (x*y>max){
+                    max = x*y;
+                }
+            } 
+        }
+        return max;
+    }
+};
