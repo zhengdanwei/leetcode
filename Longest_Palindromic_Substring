@@ -1,0 +1,37 @@
+class Solution {
+public:
+    string longestPalindrome(string s) {
+        // Start typing your C/C++ solution below
+        // DO NOT write int main() function
+        int max=0;
+        int maxi=0;
+        bool flag;
+        int t,j;
+        for (int i=0;i<s.length();i++){
+            t = i < s.length()-i-1 ? i : s.length()-i-1;
+        
+            for (j=1;j<=t;j++){
+                if (s[i-j]!=s[i+j])
+                    break;
+            }
+            if (2*j-1>max){
+                max=2*j-1;
+                maxi=i-j+1;
+            }
+
+            t = i < s.length()-i-2 ? i : s.length()-i-2;
+
+            for (j=0;j<=t;j++){
+                if (s[i-j]!=s[i+j+1]) 
+                    break;        
+            }
+            if (2*j>max){
+                max = 2*j;
+                maxi = i-j+1;
+            }
+        }
+        
+        
+        return s.substr(maxi,max);    
+    }
+};
