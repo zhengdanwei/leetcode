@@ -1,0 +1,24 @@
+class Solution {
+public:
+    bool isMatch(const char *s, const char *p) {
+        // Start typing your C/C++ solution below
+        // DO NOT write int main() function    
+        char *j=p;
+        while(*j!='\0'){
+            
+        }
+        
+        
+        char *i=s;
+        while (*i!='\0'){
+            while ()
+                possible[] = true;
+            if (*i==now || s[now]=='.')
+                possible[now] = true;
+        }
+        
+        
+        if (possible[end]) return true;
+        else return false;
+    }
+};
