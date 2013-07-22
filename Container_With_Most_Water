@@ -4,13 +4,28 @@ public:
         // Start typing your C/C++ solution below
         // DO NOT write int main() function
         
-        //TODO：当前是简单粗暴的枚举解法，需要优化算法
         int max=0;
         int x,y;
-        for (int i=0;i<height.size();i++){
-            for (int j=i+1;j<height.size();j++){
-                x = j-i;
-                y = height[i] < height[j] ? height[i] : height[j];
+        vector<int> left;
+        vector<int> right;
+                
+        for (int i=0,y=0;i<height.size();i++){
+            if (height[i]>y){
+                left.push_back(i);
+                y = height[i];                
+            }
+        }
+        for (int i=height.size()-1,y=0;i>=0;i--){
+            if (height[i]>y){
+                right.push_back(i);
+                y = height[i];                
+            }
+        }
+        
+        for (int i=0;i<left.size();i++){
+            for (int j=0;j<right.size();j++){
+                x = right[j]-left[i];
+                y = height[left[i]] < height[right[j]] ? height[left[i]] : height[right[j]];
                 if (x*y>max){
                     max = x*y;
                 }
