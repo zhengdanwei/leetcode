@@ -1,0 +1,35 @@
+class Solution {
+public:
+    string convert(string s, int nRows) {
+        // Start typing your C/C++ solution below
+        // DO NOT write int main() function    
+        if (nRows==1) return s;
+        
+        string ans = "";
+        int a,b,i,j;
+        int index;
+        string* ss = new string[nRows];
+        
+        i=0;
+        while(i<s.length()){
+            for (j=0;j<nRows-1;j++){
+                ss[j] += s[i];               
+                i++;
+                if (i==s.length()) break;
+            }
+            if (i==s.length()) break;
+            
+            for (j=1;j<nRows;j++){
+                ss[nRows-j] += s[i];
+                i++;
+                if (i==s.length()) break;
+            }
+            if (i==s.length()) break;            
+        }
+
+        for (i=0;i<nRows;i++)
+            ans += ss[i];
+
+        return ans;
+    }
+};
