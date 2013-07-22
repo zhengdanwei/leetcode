@@ -3,22 +3,29 @@ public:
     bool isMatch(const char *s, const char *p) {
         // Start typing your C/C++ solution below
         // DO NOT write int main() function    
-        char *j=p;
-        while(*j!='\0'){
-            
+        if (*p=='\0'){
+            if (*s=='\0'){
+                return true;
+            }else{
+                return false;
+            }
         }
         
-        
-        char *i=s;
-        while (*i!='\0'){
-            while ()
-                possible[] = true;
-            if (*i==now || s[now]=='.')
-                possible[now] = true;
+        if(p[1]=='*'){
+            if (isMatch(s,p+2)){
+                return true;                
+            }
+            else if ((*p=='.' || *p==*s) && *s!='\0'){      //*s!='\0' important!!!
+                return isMatch(s+1,p);
+            }else{
+                return false;
+            }
+        }else{
+            if ((*p=='.' || *p==*s) && *s!='\0'){           //*s!='\0' important!!!
+                return isMatch(s+1,p+1);
+            }else{
+                return false;
+            }
         }
-        
-        
-        if (possible[end]) return true;
-        else return false;
     }
 };
