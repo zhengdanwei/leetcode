@@ -1,0 +1,43 @@
+class Solution {
+public:
+    string tmp;
+    vector<string> result;
+    int stnum;
+    int leftnum;
+    
+    void dfs(){
+        if (leftnum==0 && stnum==0){
+            result.push_back(tmp);
+            return;
+        }
+        
+        if (leftnum>0){
+            leftnum--;
+            stnum++;
+            tmp.push_back('(');
+            dfs();
+            tmp.pop_back();
+            stnum--;
+            leftnum++;
+        }
+        
+        if(stnum>0){
+            stnum--;
+            tmp.push_back(')');
+            dfs();
+            tmp.pop_back();
+            stnum++;
+        }
+    }    
+    
+    vector<string> generateParenthesis(int n) {
+        // Start typing your C/C++ solution below
+        // DO NOT write int main() function
+        tmp="";
+        result.clear();
+        stnum=0;
+        leftnum=n;
+        dfs();
+        return result;
+    }
+};
