@@ -1,0 +1,48 @@
+class Solution {
+public:
+    vector<vector<int> > fourSum(vector<int> &num, int target) {
+        // Start typing your C/C++ solution below
+        // DO NOT write int main() function
+        sort(num.begin(),num.end());
+        vector<vector<int>> v;
+        vector<int> vvv;
+        vector<int> vvvv;
+        
+        int i0,i,j,k,tmp;
+        if (num.size()<3) return v;
+        
+        for (i0=0;i0<num.size()-3;){
+ 
+                        
+        for (i=i0+1;i<num.size()-2;){   
+            j = i+1;
+            k = num.size()-1;
+            
+            while (j<k){
+                if (num[i0]+num[i]+num[j]+num[k] == target){                    
+                    vvv.clear();
+                    vvv.push_back(num[i0]);
+                    vvv.push_back(num[i]);
+                    vvv.push_back(num[j]);
+                    vvv.push_back(num[k]);
+                    v.push_back(vvv);
+                    tmp=num[j];
+                    while (j<k && num[j]==tmp) j++;
+                }else if (num[i0]+num[i]+num[j]+num[k] < target){
+                    j++;
+                }else{
+                    k--;
+                }
+            }
+            
+            tmp = num[i];
+            while (i<num.size()-2 && num[i]==tmp) i++;
+        }
+        tmp = num[i0];
+        while (i0<num.size()-3 && num[i0]==tmp) i0++;        
+        }
+        
+        
+        return v;
+    }
+};
