@@ -1,0 +1,49 @@
+class Solution {
+public:
+    vector<string> letterCombinations(string digits) {
+        // Start typing your C/C++ solution below
+        // DO NOT write int main() function
+        int i,j,d;
+        string map[10] = {"", "" , "abc", "def", "ghi", "jkl", 
+                                "mno", "pqrs", "tuv", "wxyz"};
+        int ii[10] = {0};
+        string tmp="";
+        string* combine;
+        char c;
+        vector<string> result;
+        
+        i=0;
+        while(1){
+            if (i==-1)
+                break;
+            
+            if (i==digits.size()){
+                result.push_back(tmp);
+                i--;
+                continue;
+            }
+            
+            d = digits[i] - '0';
+            if (d==0 || d ==1){
+                break;
+                //i++;
+                //continue;                
+            }
+            
+            if (ii[i] == map[d].size()){
+                tmp.pop_back();
+                ii[i]=0;
+                i--;
+            }else{
+                c = map[d][ii[i]];
+                if (ii[i]>0)
+                    tmp.pop_back();
+                tmp.push_back(c);
+                ii[i]++;
+                i++;
+            }        
+        }
+        
+        return result;
+    }
+};
