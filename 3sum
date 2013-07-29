@@ -5,23 +5,32 @@ public:
         // DO NOT write int main() function
         sort(num.begin(),num.end());
         vector<vector<int>> v;
+        vector<int> vvv;
+        vector<int> vvvv;
         
-        int i,j,k;
+        int i,j,k,tmp;
         if (num.size()<3) return v;
         
         for (i=0;i<num.size()-2;i++){
+            if (i>0){
+                while (num[i-1]==num[i]){
+                    i++;
+                    if (i>=num.size()-2) break;
+                }
+            }
+            
             j = i+1;
             k = num.size()-1;
             
             while (j<k){
                 if (num[i]+num[j]+num[k] == 0){                    
-                    vector<int> vvv;
+                    vvv.clear();
                     vvv.push_back(num[i]);
                     vvv.push_back(num[j]);
                     vvv.push_back(num[k]);
                     v.push_back(vvv);
-                    while(j<k && num[j+1]==num[j]) j++;     //MLE
-                    //while(j<k) j++; //这句就不会MLE但是有重复的数组的话会错
+                    tmp=num[j];
+                    while (j<k && num[j]==tmp) j++;
                 }else if (num[i]+num[j]+num[k] < 0){
                     j++;
                 }else{
