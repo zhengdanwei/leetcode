@@ -1,0 +1,23 @@
+class Solution {
+public:
+    char *strStr(char *haystack, char *needle) {
+        // Start typing your C/C++ solution below
+        // DO NOT write int main() function
+        bool flag;
+        int lena = strlen(haystack);
+        int lenb = strlen(needle);
+        
+        flag=false;
+        for (int i=0;i<=lena-lenb;i++){
+            flag = true;
+            for(int j=0;j<lenb;j++){
+                if (haystack[i+j]!=needle[j]){
+                    flag=false;
+                    break;
+                }
+            }
+            if (flag) return haystack+i;
+        }
+        return NULL;
+    }
+};
