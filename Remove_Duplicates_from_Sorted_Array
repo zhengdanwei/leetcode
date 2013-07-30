@@ -1,0 +1,16 @@
+class Solution {
+public:
+    int removeDuplicates(int A[], int n) {
+        // Start typing your C/C++ solution below
+        // DO NOT write int main() function
+        int i,j,tmp;
+        i=0;j=0;
+        while (i<n){
+            tmp = A[i];
+            while (A[i]==tmp && i<n) i++;
+            A[j] = tmp;
+            j++;
+        }
+        return j;
+    }
+};
