@@ -1,5 +1,6 @@
 class Solution {
 public:
+    //更好的方法：使用分治！
     int maxSubArray(int A[], int n) {
         // Start typing your C/C++ solution below
         // DO NOT write int main() function
