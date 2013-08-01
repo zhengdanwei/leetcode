@@ -1,0 +1,62 @@
+class Solution {
+public:
+    vector<bool> col;
+    vector<bool> diag1;
+    vector<bool> diag2;
+    vector<int> place;
+    vector<vector<string>> result;
+    int n;
+
+    void generate(){
+        
+        vector<string> solution;
+        string t;
+        
+        for (int i=0;i<n;i++){
+            t.assign(n, '.');
+            t[place[i]] = 'Q';
+            solution.push_back(t);
+        }
+        result.push_back(solution);
+    }
+
+
+    void dfs(int i){
+        if (i>=n){
+            generate();
+            return;
+        }
+        
+        for (int j=0;j<n;j++){ 
+            if (col[j]) continue;
+            if (diag1[i+j]) continue;
+            if (diag2[n-i+j]) continue;
+            
+            col[j] = true;
+            diag1[i+j] = true;
+            diag2[n-i+j] = true;
+
+            place[i] = j;
+            dfs(i+1);
+
+            col[j] = false;
+            diag1[i+j] = false;
+            diag2[n-i+j] = false;
+        }
+    }
+
+
+    vector<vector<string> > solveNQueens(int _n) {
+        // Start typing your C/C++ solution below
+        // DO NOT write int main() function
+        n = _n;
+        result.clear();
+        place.assign(_n, 0);
+        col.assign(_n, false);
+        diag1.assign(2*_n, false);
+        diag2.assign(2*_n, false);
+        
+        dfs(0);
+        return result;
+    }
+};
