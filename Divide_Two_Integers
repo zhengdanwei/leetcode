@@ -1,0 +1,41 @@
+class Solution {
+public:
+    int divide(int dividend, int divisor) {
+        // Start typing your C/C++ solution below
+        // DO NOT write int main() function
+        int i = 0;
+        unsigned int result = 0;
+        int sign = 1;
+        
+        unsigned int dividend1 = (unsigned int)dividend;
+        unsigned int divisor1 = (unsigned int)divisor;
+        
+        
+        if (dividend < 0){
+            sign = -sign;
+            dividend1 = ~dividend1 + 1;
+        }
+        
+        if (divisor < 0){
+            sign = -sign;
+            divisor1 = ~divisor1 + 1;
+        }
+
+
+        while (divisor1 <= dividend1>>(i+1)){
+            i++;
+            if (i>=31) break;
+        }
+        
+        while (i>=0){
+            if (dividend1>=divisor1<<i){
+                dividend1-=divisor1<<i;
+                result+=1<<i;
+            }
+            i--;
+        }
+        
+        if (sign==-1) result = ~result +1;
+        return result;
+    }
+};
