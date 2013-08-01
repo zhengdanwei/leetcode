@@ -1,0 +1,30 @@
+class Solution {
+//搞不懂题目意思……
+public:
+    map<char, char> anna{
+        {'o','o'},{'b','q'},{'q','b'},{'d','p'},{'p','d'},{'n','u'},{'z','z'}
+    };
+
+    bool judge(string &s1, string &s2){        
+        if (s.size()==0) return false;
+        
+        map<char, char>::iterator it;
+        for (int i=0;i<s.size();i++){
+            it = anna.find(s[i]);
+            if (it==anna.end()) return false;
+            else if (anna[s[i]] != s[s.size()-i-1]) return false;
+        }
+        return true;
+    }
+    
+
+    vector<string> anagrams(vector<string> &strs) {
+        // Start typing your C/C++ solution below
+        // DO NOT write int main() function
+        vector<string> result;
+        for (int i=0;i<strs.size();i++){
+            if (judge(strs[i])) result.push_back(strs[i]);
+        }
+        return result;
+    }
+};
