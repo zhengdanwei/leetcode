@@ -1,0 +1,35 @@
+class Solution {
+public:
+    
+    int findlower(int A[], int l, int r, int target){
+        if (l>r) return -1;
+        if (l==r && A[l]==target) return l;
+        
+        if (target<A[l] || target>A[r]) return -1;
+        int mid = (l+r)/2;
+        if (target < A[mid]) return findlower(A, l, mid-1, target);
+        else if (target>A[mid]) return findlower(A, mid+1, r, target);
+        else return findlower(A, l, mid, target);
+    }
+
+    int findupper(int A[], int l, int r, int target){
+        if (l>r) return -1;
+        if (l==r && A[l]==target) return l;
+        
+        if (target<A[l] || target>A[r]) return -1;
+        int mid = (l+r+1)/2;
+        if (target < A[mid]) return findupper(A, l, mid-1, target);
+        else if (target>A[mid]) return findupper(A, mid+1, r, target);
+        else return findupper(A, mid, r, target);
+    }
+    
+    vector<int> searchRange(int A[], int n, int target) {
+        // Start typing your C/C++ solution below
+        // DO NOT write int main() function
+        
+        vector<int> result;
+        result.push_back(findlower(A,0,n-1,target));
+        result.push_back(findupper(A,0,n-1,target));
+        return result;
+    }
+};
