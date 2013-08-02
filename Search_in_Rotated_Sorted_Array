@@ -1,0 +1,42 @@
+class Solution {
+public:
+    int find(int A[], int l, int r, int target){
+        if (l>r) return -1;
+        if (l==r){
+            if (A[l]==target) return l;
+            else return -1;
+        }
+        
+        int mid = (l+r)/2;
+        int tmp;
+        
+        if (A[mid] > A[l]){
+            if (target > A[mid]) return find(A, mid+1, r, target);
+            else if (target == A[mid]) return mid;
+            else {
+                tmp = find(A, l, mid-1, target);
+                if (tmp>=0) return tmp;
+                else return find(A, mid+1, r, target);
+            }
+        }else if (A[mid] < A[l]){
+            if (target > A[mid]){
+                tmp = find(A, l, mid-1, target);
+                if (tmp>=0) return tmp;
+                else return find(A, mid+1, r, target);            
+            }
+            else if (target == A[mid]) return mid;
+            else return find(A, l, mid-1, target);
+        }else{
+            if (target == A[l]) return l;
+            if (target == A[r]) return r;
+            return -1;
+        }        
+    }
+
+
+    int search(int A[], int n, int target) {
+        // Start typing your C/C++ solution below
+        // DO NOT write int main() function
+        return find(A,0,n-1,target);        
+    }
+};
