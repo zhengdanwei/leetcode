@@ -18,10 +18,7 @@ public:
         vector<TreeNode*> path;
         if(root!=NULL) path.push_back(root);
         
-        int i=0;
-        while(1){
-            if (path.size() == 0) break;
-
+        while(path.size()!=0){
             if (p==path.back()){
                 p = path.back()->left;
                 if (p!=NULL){
