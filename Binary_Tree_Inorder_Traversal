@@ -8,7 +8,7 @@
  * };
  */
 class Solution {
-//虽然过不了不过大致可以代表我心中递归转迭代的标准方式
+//虽然过了但是感觉这个方法不大漂亮啊
 public:
     vector<int> inorderTraversal(TreeNode *root) {
         // Start typing your C/C++ solution below
@@ -16,31 +16,30 @@ public:
         vector<int> result;
         TreeNode *p = root;
         vector<TreeNode*> path;
-        vector<int> status;
+        if(root!=NULL) path.push_back(root);
         
-        status[0]=0;
         int i=0;
         while(1){
             if (path.size() == 0) break;
 
-            if (status[i] == 0){
+            if (p==path.back()){
                 p = path.back()->left;
                 if (p!=NULL){
                     path.push_back(p);
-                    status[++i]=0;
+                    continue;
                 }
-            }else if (status[i]==1){
-                result.push_back(p->val);
-                status[i]++;
-            }else if (status[i]==2){
+            }
+            if (p==path.back()->left){
+                result.push_back(path.back()->val);
                 p = path.back()->right;
                 if (p!=NULL){
                     path.push_back(p);
-                    status[++i]=0;
+                    continue;
                 }                
-            }else if (status[i]==3){
+            }
+            if (p==path.back()->right){
+                p = path.back();
                 path.pop_back();
-                status[--i]++;
             }
         }
         
