@@ -1,0 +1,39 @@
+class Solution {
+//C++没有个inline的数字转字符串的函数真是挺烦人的……
+public:
+    vector<string> result;
+    string ip;
+
+    void restore(int i, int j, const string solution){
+        int tmp=0;
+        stringstream tmps;
+        
+        if (ip.length()-i > (4-j)*3) return;        
+        if (ip.length()-i < 4-j) return;
+        
+        for (int k=i;k<i+3;k++){
+            
+            tmp = tmp*10 + ip[k] - '0';
+            if (tmp<256) tmps<<ip[k];
+            else break;
+            
+            if (k+1 == ip.length()){
+                if (j==3) result.push_back(solution + tmps.str());
+                break;
+            }
+            else{
+                restore(k+1, j+1, solution + tmps.str() + ".");
+                if (k==i && ip[i]=='0') break;
+            } 
+        }
+    }
+
+    vector<string> restoreIpAddresses(string s) {
+        // Start typing your C/C++ solution below
+        // DO NOT write int main() function
+        ip = s;
+        result.clear();
+        restore(0, 0, "");
+        return result;
+    }
+};
