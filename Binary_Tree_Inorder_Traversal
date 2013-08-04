@@ -8,23 +8,42 @@
  * };
  */
 class Solution {
-//递归版本，接下来做迭代版本
+//虽然过不了不过大致可以代表我心中递归转迭代的标准方式
 public:
-    vector<int> result;
-    
-    void traversal(TreeNode *root){
-        if (root==NULL) return;
-        traversal(root->left);
-        result.push_back(root->val);
-        traversal(root->right);
-    }
-    
-
     vector<int> inorderTraversal(TreeNode *root) {
         // Start typing your C/C++ solution below
         // DO NOT write int main() function
-        result.clear();
-        traversal(root);
+        vector<int> result;
+        TreeNode *p = root;
+        vector<TreeNode*> path;
+        vector<int> status;
+        
+        status[0]=0;
+        int i=0;
+        while(1){
+            if (path.size() == 0) break;
+
+            if (status[i] == 0){
+                p = path.back()->left;
+                if (p!=NULL){
+                    path.push_back(p);
+                    status[++i]=0;
+                }
+            }else if (status[i]==1){
+                result.push_back(p->val);
+                status[i]++;
+            }else if (status[i]==2){
+                p = path.back()->right;
+                if (p!=NULL){
+                    path.push_back(p);
+                    status[++i]=0;
+                }                
+            }else if (status[i]==3){
+                path.pop_back();
+                status[--i]++;
+            }
+        }
+        
         return result;
     }
 };
