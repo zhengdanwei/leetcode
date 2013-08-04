@@ -1,4 +1,5 @@
 class Solution {
+//第一次用迭代式的方法写搜索……
 public:
     vector<string> letterCombinations(string digits) {
         // Start typing your C/C++ solution below
