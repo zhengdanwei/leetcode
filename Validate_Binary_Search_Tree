@@ -12,8 +12,8 @@ public:
     bool isValid(TreeNode *root, int min, int max){
         if (root == NULL) return true;
         if (root->val>max || root->val<min) return false;
-        if (isValid(root->left, min, root->val-1) && 
-            isValid(root->right, root->val+1, max)) return true;
+        if (isValid(root->left, min, root->val-1) &&                //What if INT_MIN?
+            isValid(root->right, root->val+1, max)) return true;    //What if INT_MAX?
             else return false;
     }
 
