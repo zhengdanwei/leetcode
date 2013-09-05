@@ -1,0 +1,46 @@
+/**
+ * Definition for binary tree
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    pair<int, int> makePair(int first, int second){
+        return pair<int, int>(first,second);
+    }
+    
+    int biggest3(int a, int b, int c){
+        if (a>b)
+            if (a>c) return a;
+            else return c;
+        else if (b>c) return b;
+        else return c;
+    }
+
+
+    pair<int, int> pathSum(TreeNode *root){
+        if (root==NULL) return makePair(0,INT_MIN);
+        
+        pair<int, int> left = pathSum(root->left);
+        pair<int, int> right = pathSum(root->right);        
+        
+        int max1 = biggest3(left.first , right.first, 0) + root->val;
+        
+        int max2 = (left.first>0?left.first:0) + (right.first>0?right.first:0) + root->val;
+        
+        if (left.second > max2) max2 = left.second;
+        if (right.second > max2) max2 = right.second;        
+        
+        return makePair(max1, max2);
+    }
+    
+    int maxPathSum(TreeNode *root) {
+        // Start typing your C/C++ solution below
+        // DO NOT write int main() function
+        return pathSum(root).second;
+    }
+};
