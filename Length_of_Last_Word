@@ -1,0 +1,25 @@
+class Solution {
+public:
+    int lengthOfLastWord(const char *s) {
+        // Start typing your C/C++ solution below
+        // DO NOT write int main() function
+        int len = strlen(s);
+        int result=0;
+        bool flag = true;
+        
+        for (int i=0;i<len;i++){
+            if (s[i]!=' ') {
+                if (flag){
+                    flag = false;
+                    result = 1;
+                }
+                else result++;
+            }
+            else{
+                flag = true;
+            } 
+        }
+        
+        return result;
+    }
+};
