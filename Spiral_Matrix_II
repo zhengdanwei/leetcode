@@ -1,0 +1,39 @@
+class Solution {
+public:
+    vector<vector<int> > generateMatrix(int n) {
+        // Start typing your C/C++ solution below
+        // DO NOT write int main() function
+        vector<vector<int>> result;
+        for (int i=0;i<n;i++){
+            vector<int> row(n,0);
+            result.push_back(row);
+        }
+        
+        int count=0;
+        for (int i=0;i<n/2;i++){
+            for (int j=i;j<n-i-1;j++){
+                count++;
+                result[i][j] = count;
+            }
+            
+            for (int j=i;j<n-i-1;j++){
+                count++;
+                result[j][n-i-1] = count;
+            }
+            
+            for (int j=i;j<n-i-1;j++){
+                count++;
+                result[n-i-1][n-j-1] = count;
+            }
+            
+            for (int j=i;j<n-i-1;j++){
+                count++;
+                result[n-j-1][i] = count;
+            }               
+        }
+        
+        if (n%2==1) result[n/2][n/2] = count+1;
+        
+        return result;
+    }
+};
