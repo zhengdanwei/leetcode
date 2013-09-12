@@ -1,0 +1,26 @@
+class Solution {
+public:
+    string getPermutation(int n, int k) {
+        // Start typing your C/C++ solution below
+        // DO NOT write int main() function
+        vector<int> pnum(10,1);
+        vector<char> snum(10);
+        for (int i=0;i<n;i++) snum[i] = '1'+i;
+        string result="";
+        
+        for (int i=1;i<=n;i++){
+            pnum[i] = pnum[i-1]*i;
+        }
+        if (k>pnum[n]) return "(+________+)";
+        
+        for (int i=n-1;i>0;i--){
+            result += snum[(k-1)/pnum[i]];
+            snum.erase(snum.begin() + (k-1)/pnum[i]);
+            k = (k-1)%pnum[i]+1;
+        }
+    
+        result+=snum[0];
+        
+        return result;
+    }
+};
