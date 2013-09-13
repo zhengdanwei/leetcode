@@ -1,0 +1,28 @@
+class Solution {
+public:
+    int removeDuplicates(int A[], int n) {
+        // Start typing your C/C++ solution below
+        // DO NOT write int main() function
+        int i, j=1;
+        if (n==0) return 0;
+        
+        int previous = A[0];
+        bool duplicate = false;
+        
+        for (int i=1;i<n;i++){
+            
+            if (A[i] == previous) {
+                if (!duplicate){
+                    A[j++] = A[i];
+                }
+                duplicate = true;
+            }else{
+                A[j++] = A[i];
+                previous = A[i];
+                duplicate = false;
+            }    
+        }
+        
+        return j;
+    }
+};
