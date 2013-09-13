@@ -1,0 +1,13 @@
+class Solution {
+public:
+    int fib(int n, int a, int b){
+        if (n==1) return a;
+        return fib(n-1, a+b, a);
+    }
+
+    int climbStairs(int n) {
+        // Start typing your C/C++ solution below
+        // DO NOT write int main() function
+        return fib(n, 1, 1);
+    }
+};
