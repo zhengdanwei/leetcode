@@ -1,41 +1,15 @@
 class Solution {
 public:
-    bool find(int A[], int l, int r, int target){
-        if (l>r) return false;
-        if (l==r){
-            if (target==A[l]) return true;
-            else return false;
-        }
-        
-        int mid = (l+r)/2;
-        
-        if (A[mid]<A[l]){
-            if (A[mid]<target) {
-                if (find(A, mid+1, r, target)) return true;
-                else return find(A, l, mid-1, target);                
-            }
-            else if (A[mid]>target) return find(A, l, mid-1, target);
-            else return true;
-         
-        }
-        else if (A[mid]>A[l]){
-            if (A[mid]>target){
-                if (find(A, mid+1, r, target)) return true;
-                else return find(A, l, mid-1, target);                                
-            }
-            else if (A[mid]<target) return find(A, mid+1, r, target);
-            else return true;
-        }else{
-            if (target == A[l]) return true;
-            else return find(A, mid+1, r, target);
-        }
-    }
-    
 
     bool search(int A[], int n, int target) {
         // Start typing your C/C++ solution below
         // DO NOT write int main() function
+
+        //因为当中间数和左端数相等时无法二分，所以只好暴力枚举
+        for (int i=0;i<n;i++){
+            if (A[i]==target) return true;
+        }
+        return false;
         
-        return find(A, 0, n-1, target);
     }
 };

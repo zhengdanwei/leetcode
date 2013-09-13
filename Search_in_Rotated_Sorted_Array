@@ -1,6 +1,7 @@
 class Solution {
 public:
     int find(int A[], int l, int r, int target){
+        //最坏情况还是可能O(n)，是否有更好的算法？
         if (l>r) return -1;
         if (l==r){
             if (A[l]==target) return l;
