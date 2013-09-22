@@ -1,0 +1,40 @@
+class Solution {
+//TODO:将isPalindrome改为map结构
+public:
+    void search(int i, string & s, vector<string> partition, vector<vector<string>> & result, vector<vector<bool>> & isPal){
+        int len = s.size();
+        if (i>=len) {
+            result.push_back(partition);
+            return;
+        }
+        
+        for (int j=len-1;j>=i;j--){
+            if (isPal[i][j]){
+                partition.push_back(s.substr(i, j-i+1));
+                search(j+1, s, partition, result, isPal);
+                partition.pop_back();
+            }
+        }
+    }
+    
+    vector<vector<string>> partition(string s) {
+        // Start typing your C/C++ solution below
+        // DO NOT write int main() function
+        
+        int len = s.size();
+        vector<vector<string>> result;
+        vector<vector<bool>> isPal(len, vector<bool>(len, false));
+        
+        for (int i=len-1;i>=0;i--)
+            for (int j=i;j<len;j++){
+                if (i==j) isPal[i][j] = true;
+                else if (i+1==j && s[i]==s[j]) isPal[i][j] = true;
+                else if (isPal[i+1][j-1] && s[i]==s[j]) isPal[i][j] = true;
+                else isPal[i][j]=false;
+            }
+        
+        vector<string> partition;
+        search(0, s, partition, result, isPal);
+        return result;
+    }
+};
