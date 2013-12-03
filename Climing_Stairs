@@ -1,0 +1,12 @@
+class Solution {
+//偷懒用了尾递归的写法而且没判断超出int范围的数据，应该无所谓吧……
+public:
+    int climbStairsTail(int n, int a1, int a2){
+        if (n<=1) return a1;
+        else return climbStairsTail(n-1, a1+a2, a1);
+    }
+    
+    int climbStairs(int n) {
+        return climbStairsTail(n, 1, 1);
+    }
+};
