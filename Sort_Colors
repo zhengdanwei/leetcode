@@ -1,0 +1,20 @@
+class Solution {
+public:
+    void sortColors(int A[], int n) {
+       int p=0, q=0, r=0;
+       for (int i=0;i<n;i++){
+           if (A[i]==0){
+               A[p]=0;
+               if (q>0) A[p+q]=1;
+               if (r>0) A[i]=2;
+               p++;
+           }else if (A[i]==1){
+               A[p+q] = 1;
+               if (r>0) A[i] = 2;
+               q++;
+           }else{
+               r++;
+           }
+       }
+    }
+};
