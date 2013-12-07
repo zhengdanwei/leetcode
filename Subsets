@@ -1,0 +1,23 @@
+class Solution {
+public:
+    void findNext(vector<vector<int>> &result, vector<int>&S, vector<int> & current, int i){
+        if (i == S.size()){
+            result.push_back(current);
+            return;
+        }
+        
+        findNext(result, S, current, i+1);        
+        current.push_back(S[i]);
+        findNext(result, S, current, i+1);
+        current.pop_back();
+    }
+
+    vector<vector<int> > subsets(vector<int> &S) {
+        vector<vector<int>> result;
+        vector<int> current;
+        
+        sort(S.begin(), S.end(), std::less<int>());
+        findNext(result, S, current, 0);
+        return result;
+    }
+};
