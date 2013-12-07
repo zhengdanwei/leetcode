@@ -1,0 +1,62 @@
+class Solution {
+//毛啊！题目根本没说T里面可能有重复的字符而且重复情况下该怎么处理也没说！
+//然后写成当做一个字符处理的以后给我WA！
+public:
+    bool exceed(map<char,int> & count, map<char,int> & need, char c){
+        if (need.find(c)==need.end() || count[c]>need[c]) return true;
+        else return false;
+    }
+
+    string minWindow(string S, string T) {
+        int i=0,j=0;
+        map<char, int> count;
+        map<char, int> need;
+        int num=0;
+        int min,mini,minj;
+        
+        for (int i=0;i<T.length();i++){
+            if (need.find(T[i])!=need.end()) need[T[i]]++;
+            else need[T[i]] = 1;
+            count[T[i]] = 0;
+        }
+        
+        for (const auto &c:need){
+            num++;
+        }
+        
+        if (num==0) return "";
+        
+        for (;num>0 && j<S.length();j++){
+            if (count.find(S[j])!=count.end()) {
+                count[S[j]]++;
+                if (count[S[j]] == need[S[j]]) num--;
+            }
+        }
+        
+        if (num>0) return "";
+        
+        while (exceed(count, need, S[i])){
+            if (count.find(S[i])!=count.end()) count[S[i]]--;
+            i++;
+        }
+        
+        min = j-i;
+        mini = i;
+        minj = j;
+        
+        for (;j<S.length();j++){
+            if (count.find(S[j])!=count.end()) count[S[j]] ++;
+            while (exceed(count, need, S[i])){
+                if (count.find(S[i])!=count.end()) count[S[i]]--;
+                i++;
+            }            
+            if (j+1-i<min){
+                min = j+1-i;
+                minj = j+1;
+                mini = i;
+            }
+        }
+        
+        return S.substr(mini,minj-mini);
+    }
+};
