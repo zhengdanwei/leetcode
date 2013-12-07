@@ -1,0 +1,51 @@
+class Solution {
+public:
+    bool inboard(pair<int,int> crdt, vector<vector<char>>& board){
+        if (crdt.first<0 || crdt.second<0) return false;
+        if (crdt.first>=board.size() || crdt.second>=board[0].size()) return false;
+        return true;
+    }
+
+    bool exist(vector<vector<char> > &board, string word) {
+        queue<pair<int,int>> crdt;
+        map<pair<int,int>, bool> point;
+        
+        if (word.length()==0) return true;
+        
+        int n = board.size();
+        if (n==0) return false;
+        int m = board[0].size();
+        if (m==0) return false;
+        
+        for (int i=0;i<n;i++){
+            for (int j=0;j<m;j++){
+                if (board[i][j] == word[0]) crdt.push(make_pair(i,j));
+            }
+        }
+        
+        vector<pair<int, int>> delta;
+        delta.push_back(make_pair(1,0));
+        delta.push_back(make_pair(-1,0));        
+        delta.push_back(make_pair(0,-1));        
+        delta.push_back(make_pair(0,-1));        
+        
+        for (int i=1;i<word.length();i++){
+            int l = crdt.size();
+            point.clear();
+            for (int j=0;j<l;j++){
+                 for (int k=0;k<4;k++){
+                     int x = crdt.front().first + delta[k].first;
+                     int y = crdt.front().second + delta[k].second;
+                     if (inboard(make_pair(x,y), board) && board[x][y]==word[i] && point.find(make_pair(x,y))==point.end()) {
+                        crdt.push(make_pair(x,y));
+                        point[make_pair(x,y)] = true;                         
+                     } 
+                 }
+                 crdt.pop();
+            }
+        }
+        
+        if (!crdt.empty()) return true;
+        else return false;
+    }
+};
