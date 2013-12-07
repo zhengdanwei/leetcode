@@ -1,0 +1,21 @@
+class Solution {
+private:
+    int n,k;
+public:
+    void findNext(vector<vector<int>> & result, vector<int> current, int i, int last){
+        if (i==k) result.push_back(current);
+        else
+        for (int j=last+1;j<=n-k+i+1;j++){
+            current[i]=j;
+            findNext(result, current, i+1, j);
+        }
+    }
+
+    vector<vector<int> > combine(int _n, int _k) {
+        n = _n; k = _k;
+        vector<vector<int>> result;
+        vector<int> current(k,0);
+        findNext(result, current, 0, 0);
+        return result;
+    }
+};
