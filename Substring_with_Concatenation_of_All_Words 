@@ -1,0 +1,85 @@
+class Solution {
+private:
+    int l;
+public:
+    bool exceed(string & S, vector<string> &L, map<string, int> &mm, vector<int> &need, int i, int num){
+        vector<int> count(num,0);
+        
+        for (int j=0;j<L.size();j++){
+            string s = S.substr(i+j*l, l);
+            auto it = mm.find(s);
+            if (it==mm.end()) return false;
+            
+            count[it->second]++;
+            if (count[it->second]>need[it->second]) return false;
+        }
+        return true;
+    }
+    
+    vector<int> findSubstring(string S, vector<string> &L) {
+        vector<int> result;
+        vector<int> count(L.size()+2, 0);
+        
+        if (L.size()==0) return result;
+        map<string, int> mm;
+        
+        int num = 0;
+        l = L[0].length();
+        
+        
+        for (int i=0;i<L.size();i++){
+            if (mm.find(L[i])==mm.end()){
+                mm[L[i]] = num;
+                num++;
+            }
+            count[mm[L[i]]]++;
+        }
+        
+        /*int t = S.length() - num*l;
+         for (int i=0;i<=t;i++){
+         if (exceed(S,L,mm,count,i,num)){
+         result.push_back(i);
+         }
+         }*/
+        int j,k;
+        vector<int> count0(num,0);
+        int ll = L.size();
+        
+        for (int i=0;i<l;i++){
+            count0.assign(num,0);
+            if (i+ll*l>S.length()) break;
+            int exceedNum = 0;
+            
+            for (j=0;j<ll;j++){
+                string s = S.substr(i+j*l, l);
+                if (mm.find(s)!=mm.end()) k = mm[s];
+                else continue;
+                
+                count0[k]++;
+                if (count0[k]==count[k]) exceedNum++;
+            }
+            
+            if (exceedNum==num) result.push_back(i);
+            
+            for (;i+(j+1)*l<=S.length();j++){
+                string s1 = S.substr(i+(j-ll)*l, l);
+                if (mm.find(s1)!=mm.end()) {
+                    k = mm[s1];
+                    if (count0[k]==count[k]) exceedNum--;
+                    count0[k]--;
+                }
+                
+                string s2 = S.substr(i+j*l, l);
+                if (mm.find(s2)!=mm.end()) {
+                    k = mm[s2];
+                    count0[k]++;
+                    if (count0[k]==count[k]) exceedNum++;
+                }
+                if (exceedNum==num) result.push_back(i+(j-ll+1)*l);
+            }
+            
+        }
+        
+        return result;
+    }
+};
