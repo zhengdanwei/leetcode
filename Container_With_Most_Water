@@ -1,4 +1,5 @@
 class Solution {
+//和lzh他们讨论过，可以有O(n)的做法，有空改一改
 public:
     int maxArea(vector<int> &height) {
         // Start typing your C/C++ solution below
